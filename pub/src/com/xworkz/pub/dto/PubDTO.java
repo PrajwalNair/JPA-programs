@@ -22,8 +22,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "pub")
 @NamedQueries({ @NamedQuery(name = "findById", query = "select p from PubDTO p where p.id=:id1"),
-		@NamedQuery(name = "updateStateByName", query = "update PubDTO p set p.state=:state1 where p.name=:nm"),
-		@NamedQuery(name = "deleteByName", query = "delete PubDTO p where p.name=:nm") })
+		@NamedQuery(name = "updateStateByName", query = "update PubDTO p set p.state =: state1 where p.name=:nm"),
+		@NamedQuery(name = "deleteByName", query = "delete from PubDTO p where p.name=:nm") })
 public class PubDTO implements Serializable {
 	@Id
 	private int id;
