@@ -21,6 +21,7 @@ public class KRAwardeesRepositoryImpl implements KRAwardeesRepository {
 			transaction.begin();
 			manager.persist(dto);
 			transaction.commit();
+			System.out.println(dto);
 			
 		} catch (PersistenceException e) {
 			e.printStackTrace();
