@@ -52,8 +52,8 @@ public class PubRepositoryImpl implements PubRepository {
 		EntityTransaction transaction = createEntityManager.getTransaction();
 		transaction.begin();
 		Query createNamedQuery = createEntityManager.createNamedQuery("updateStateByName");
-		createNamedQuery.setParameter("nm", name);
-		createNamedQuery.setParameter("state1", newState);
+		createNamedQuery.setParameter("nms", name);
+		createNamedQuery.setParameter("st", newState);
 		createNamedQuery.executeUpdate();
 		transaction.commit();
 

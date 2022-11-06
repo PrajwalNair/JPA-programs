@@ -11,23 +11,22 @@ import com.xworkz.hotel.dto.HotelDTO;
 public class HotelRepositoryImpl implements HotelRepository {
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("com.xworkz");
 	EntityManager manager = null;
+
 	@Override
 	public boolean save(HotelDTO dto) {
 		try {
-		manager = factory.createEntityManager();
-		EntityTransaction transaction = manager.getTransaction();
-		transaction.begin();
-		manager.persist(dto);
-		transaction.commit();
-		}
-		catch(PersistenceException e) {
+			manager = factory.createEntityManager();
+			EntityTransaction transaction = manager.getTransaction();
+			transaction.begin();
+			manager.persist(dto);
+			transaction.commit();
+		} catch (PersistenceException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			manager.close();
-			factory.close();
+
 		}
-		
+
 		return false;
 	}
 
