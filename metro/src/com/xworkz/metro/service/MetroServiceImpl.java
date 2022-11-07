@@ -72,5 +72,12 @@ public class MetroServiceImpl implements MetroService {
 		}
 		return Optional.empty();
 	}
+	
+	@Override
+	public Optional<MetroEntity> updateNameById(int id, String newName) {
+		this.repo.updateNameById(id, newName);
+		
+		return Optional.empty();
+	}
 
 }

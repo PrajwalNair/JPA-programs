@@ -24,9 +24,19 @@ public class MetroDisplay {
 		Optional<MetroEntity> validateAndFindById = service.validateAndFindById(3);
 		if (validateAndFindById.isPresent()) {
 			System.out.println("id is present");
+			validateAndFindById.get();
 		} else {
 			System.out.println("it is null");
 		}
+		
+		Optional<MetroEntity> updateNameById = service.updateNameById(2, "ahmedabhad");
+		if (updateNameById.isPresent()) {
+			System.out.println("id is present");
+			updateNameById.get();
+		} else {
+			System.out.println("it is null");
+		}
+		
 	}
 
 }

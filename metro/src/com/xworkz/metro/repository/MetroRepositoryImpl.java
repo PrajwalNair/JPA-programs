@@ -46,4 +46,25 @@ public class MetroRepositoryImpl implements MetroRepository {
 		return Optional.empty();
 	}
 
+	@Override
+	public Optional<MetroEntity> updateNameById(int id, String newName) {
+		try {
+			manager = factory.createEntityManager();
+			EntityTransaction transaction = manager.getTransaction();
+			transaction.begin();
+			MetroEntity find = manager.find(MetroEntity.class, id);
+			if (find != null) {
+				find.setName(newName);
+				manager.remove(find);
+				System.out.println("name is updated" + find);
+				return Optional.of(find);
+			}
+			transaction.commit();
+		} finally {
+			manager.close();
+		}
+		return Optional.empty();
+
+	}
+
 }

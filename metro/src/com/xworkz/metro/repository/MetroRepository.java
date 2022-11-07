@@ -8,5 +8,7 @@ public interface MetroRepository {
 	boolean save(MetroEntity entity);
 
 	Optional<MetroEntity> findById(int id);
+	
+	Optional<MetroEntity> updateNameById(int id,String newName);
 
 }

@@ -8,5 +8,7 @@ public interface MetroService {
 	boolean validateAndSave(MetroEntity entity);
 
 	Optional<MetroEntity> validateAndFindById(int id);
+	
+	Optional<MetroEntity> updateNameById(int id,String newName);
 
 }
