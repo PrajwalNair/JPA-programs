@@ -1,5 +1,6 @@
 package com.xworkz.showroom.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -26,8 +27,26 @@ public class ShowRoomRepoImpl implements ShowRoomRepo {
 			manager.close();
 		}
 
-		return false;
+		return true;
 
+	}
+
+	@Override
+	public boolean save(List<ShowroomEntity> list) {
+		EntityManager manager = factory.createEntityManager();
+		try {
+
+			EntityTransaction transaction = manager.getTransaction();
+			transaction.begin();
+			for (ShowroomEntity showroomEntity : list) {
+				manager.persist(showroomEntity);
+			}
+			transaction.commit();
+			System.out.println(list);
+		} finally {
+			manager.close();
+		}
+		return true;
 	}
 
 	@Override

@@ -1,5 +1,8 @@
 package com.xworkz.showroom;
 
+import java.sql.Array;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import com.xworkz.showroom.entity.ShowroomEntity;
@@ -15,6 +18,8 @@ public class ShowRoomDisplay {
 		ShowroomEntity entity2 = new ShowroomEntity(3, "nagshanti ", "truck", "hubli", "india");
 		ShowroomEntity entity3 = new ShowroomEntity(4, "kirloskar", "tractor", "hubli", "india");
 		ShowroomEntity entity4 = new ShowroomEntity(5, "shanti honda", "bike", "hubli", "india");
+		ShowroomEntity entity5 = new ShowroomEntity(6, "shanti honda", "bike", "hubli", "india");
+		ShowroomEntity entity6 = new ShowroomEntity(7, "shanti honda", "bike", "hubli", "india");
 
 		ShowRoomService service = new ShowRoomServiceImpl();
 		try {
@@ -24,6 +29,8 @@ public class ShowRoomDisplay {
 //			service.validateAndSave(entity3);
 //			service.validateAndSave(entity4);
 
+			List<ShowroomEntity> list = Arrays.asList(entity5, entity6);
+			service.validateAndSave(list);
 			Optional<ShowroomEntity> valiadateAndFindById = service.valiadateAndFindById(2);
 			if (valiadateAndFindById.isPresent()) {
 				ShowroomEntity showroomEntity = valiadateAndFindById.get();
