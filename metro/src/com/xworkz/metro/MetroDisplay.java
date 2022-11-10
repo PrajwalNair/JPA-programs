@@ -17,7 +17,7 @@ public class MetroDisplay {
 				true, true);
 
 		MetroService service = new MetroServiceImpl();
-//		service.validateAndSave(entity);
+		service.validateAndSave(entity);
 //		service.validateAndSave(entity1);
 //		service.validateAndSave(entity2);
 

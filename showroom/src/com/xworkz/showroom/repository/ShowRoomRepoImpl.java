@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceException;
 
 import com.xworkz.showroom.entity.ShowroomEntity;
 import com.xworkz.showroom.util.EMFUtil;
@@ -34,15 +35,28 @@ public class ShowRoomRepoImpl implements ShowRoomRepo {
 	@Override
 	public boolean save(List<ShowroomEntity> list) {
 		EntityManager manager = factory.createEntityManager();
+		EntityTransaction transaction = manager.getTransaction();
+		int count = 0;
 		try {
 
-			EntityTransaction transaction = manager.getTransaction();
+			
 			transaction.begin();
+			System.out.println("transaction line");
+			
 			for (ShowroomEntity showroomEntity : list) {
 				manager.persist(showroomEntity);
+//				count++;
+//				if (count%20 == 0) {
+//					manager.flush();
+//					System.out.println("flushing");
+//					count=0;
+//				}
 			}
 			transaction.commit();
 			System.out.println(list);
+		}catch (PersistenceException e) {
+			e.printStackTrace();
+			transaction.rollback();
 		} finally {
 			manager.close();
 		}
