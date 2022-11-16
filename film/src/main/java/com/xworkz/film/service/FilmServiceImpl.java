@@ -91,21 +91,30 @@ public class FilmServiceImpl implements FilmService {
 			System.out.println("name is valid (ser) " + name);
 		}
 
-		return null;
+		return repository.findLangByName(name);
 	}
 
 	@Override
-	public Optional<FilmEntity> findHero(String name) {
-		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-		Validator validator = validatorFactory.getValidator();
-		Set<ConstraintViolation<String>> validate = validator.validate(name);
-		if (validate.size() > 0) {
-			System.out.println("fix the bugs (ser)");
-		} else {
-			System.out.println("name is valid (ser) " + name);
-			return repository.findHero(name);
-		}
-		return null;
+	public Optional<FilmEntity> findUniqueLanguage() {
+//		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+//		Validator validator = validatorFactory.getValidator();
+//		validator.validate();
+		return repository.findUniqueLanguage();
+
 	}
+
+//	@Override
+//	public Optional<FilmEntity> findHero(String name) {
+//		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+//		Validator validator = validatorFactory.getValidator();
+//		Set<ConstraintViolation<String>> validate = validator.validate(name);
+//		if (validate.size() > 0) {
+//			System.out.println("fix the bugs (ser)");
+//		} else {
+//			System.out.println("name is valid (ser) " + name);
+//			return repository.findHero(name);
+//		}
+//		return null;
+//	}
 
 }

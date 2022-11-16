@@ -12,6 +12,8 @@ public interface FilmService {
 
 	Optional<FilmEntity> findLangByName(String name);
 
-	Optional<FilmEntity> findHero(String name);
+//	Optional<FilmEntity> findHero(String name);
+
+	Optional<FilmEntity> findUniqueLanguage();
 
 }

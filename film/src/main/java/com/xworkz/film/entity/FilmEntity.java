@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -21,8 +22,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "film")
-@NamedQuery(name = "findLangByName", query = "select a from FilmEntity a where a.language=:lg")
-@NamedQuery(name = "findHero", query = "select b.hero from FilmEntity b where b.hero=:h")
+
+@NamedQueries({
+	@NamedQuery(name="findLangByName",query="select alia.language from FilmEntity alia where alia.name =:lg"),
+	@NamedQuery(name = "findUniqueLanguage" ,query = "select distinct alia.language from FilmEntity")
+})
 public class FilmEntity {
 	@Id
 	@GenericGenerator(name = "nm", strategy = "increment")

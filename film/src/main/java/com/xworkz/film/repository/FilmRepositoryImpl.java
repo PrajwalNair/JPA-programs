@@ -52,25 +52,37 @@ public class FilmRepositoryImpl implements FilmRepository {
 		EntityManager manager = factory.createEntityManager();
 		Query createNamedQuery = manager.createNamedQuery("findLangByName");
 		createNamedQuery.setParameter("lg", name);
-		Object singleResult = createNamedQuery.getResultList();
+		Object singleResult = createNamedQuery.getSingleResult();
 		if (singleResult != null) {
-			FilmEntity ref = (FilmEntity) singleResult;
-			return Optional.of(ref);
+			FilmEntity lang = (FilmEntity) singleResult;
+			return Optional.of(lang);
 		}
-		return null;
+		return Optional.empty();
 	}
 
+//	@Override
+//	public Optional<FilmEntity> findHero(String name) {
+//		EntityManager manager = factory.createEntityManager();
+//		Query createNamedQuery = manager.createNamedQuery("findHero");
+//		createNamedQuery.setParameter("h", name);
+//		Object singleResult = createNamedQuery.getSingleResult();
+//		if (singleResult != null) {
+//			FilmEntity ref = (FilmEntity) singleResult;
+//			return Optional.of(ref);
+//		}
+//		return null;
+//	}
+
 	@Override
-	public Optional<FilmEntity> findHero(String name) {
+	public Optional<FilmEntity> findUniqueLanguage() {
 		EntityManager manager = factory.createEntityManager();
-		Query createNamedQuery = manager.createNamedQuery("findHero");
-		createNamedQuery.setParameter("h", name);
+		Query createNamedQuery = manager.createNamedQuery("findUniqueLanguage");
 		Object singleResult = createNamedQuery.getSingleResult();
 		if (singleResult != null) {
 			FilmEntity ref = (FilmEntity) singleResult;
 			return Optional.of(ref);
 		}
-		return null;
+		return Optional.empty();
 	}
 
 }

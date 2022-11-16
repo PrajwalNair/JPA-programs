@@ -28,21 +28,27 @@ public class FilmDisplay {
 
 		FilmService service = new FilmServiceImpl();
 //		service.validateAndSave(list);
-		Optional<FilmEntity> findNameById = service.findNameById(1);
-		if (findNameById.isPresent()) {
-			FilmEntity filmEntity = findNameById.get();
-			System.out.println("main " + filmEntity);
-		}
+//		Optional<FilmEntity> findNameById = service.findNameById(1);
+//		if (findNameById.isPresent()) {
+//			FilmEntity filmEntity = findNameById.get();
+//			System.out.println("main " + filmEntity);
+//		}
 
-//		Optional<FilmEntity> findLangByName = service.findLangByName("2 states");
+//		Optional<FilmEntity> findLangByName = service.findLangByName("Bramhastra");
 //		if (findLangByName.isPresent()) {
 //			FilmEntity filmEntity = findLangByName.get();
 //			System.out.println(filmEntity);
 //		}
 
-		Optional<FilmEntity> findHero = service.findHero("hrithik roshan");
-		if (findHero.isPresent()) {
-			FilmEntity filmEntity = findHero.get();
+//		Optional<FilmEntity> findHero = service.findHero("hrithik roshan");
+//		if (findHero.isPresent()) {
+//			FilmEntity filmEntity = findHero.get();
+//			System.out.println(filmEntity);
+//		}
+
+		Optional<FilmEntity> findUniqueLanguage = service.findUniqueLanguage();
+		if (findUniqueLanguage.isPresent()) {
+			FilmEntity filmEntity = findUniqueLanguage.get();
 			System.out.println(filmEntity);
 		}
 
