@@ -63,7 +63,7 @@ public class GoldJewelleryDisplay {
 			}
 
 			Optional<Double> findTotalPriceByGramAndShopName = service.findTotalPriceByGramAndShopName(10.0,
-					"Kalyan jewellery");
+					"Joyalukas");
 			if (findTotalPriceByGramAndShopName.isPresent()) {
 				Double double1 = findTotalPriceByGramAndShopName.get();
 				System.out.println(double1);

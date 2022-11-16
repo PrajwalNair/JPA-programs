@@ -53,15 +53,20 @@ public class GoldJewelleryRepoImpl implements GoldJewelleryRepo {
 
 	public Optional<GoldJewelleryEntity> findByShopNameAndId(int id, String shopName) {
 		EntityManager manager = factory.createEntityManager();
-		Query query = manager.createNamedQuery("findByShopNameAndId");
-		query.setParameter("tag", id);
-		query.setParameter("sh", shopName);
-		Object singleResult = query.getSingleResult();
-		if (singleResult != null) {
-			GoldJewelleryEntity ref = (GoldJewelleryEntity) singleResult;
-			return Optional.of(ref);
-		} else {
-			System.out.println("data is not present for " + id + shopName);
+		try {
+			Query query = manager.createNamedQuery("findByShopNameAndId");
+
+			query.setParameter("tag", id);
+			query.setParameter("sh", shopName);
+			Object singleResult = query.getSingleResult();
+			if (singleResult != null) {
+				GoldJewelleryEntity ref = (GoldJewelleryEntity) singleResult;
+				return Optional.of(ref);
+			} else {
+				System.out.println("data is not present for " + id + shopName);
+			}
+		} finally {
+			manager.close();
 		}
 
 		return Optional.empty();
@@ -70,14 +75,19 @@ public class GoldJewelleryRepoImpl implements GoldJewelleryRepo {
 	public Optional<String> findShopNameById(int id) {
 
 		EntityManager manager = factory.createEntityManager();
-		Query query = manager.createNamedQuery("findShopNameById");
-		query.setParameter("tag", id);
-		Object singleResult = query.getSingleResult();
-		if (singleResult != null) {
-			String ref = (String) singleResult;
-			return Optional.of(ref);
-		} else {
-			System.out.println("data is not present for " + id);
+		try {
+			Query query = manager.createNamedQuery("findShopNameById");
+
+			query.setParameter("tag", id);
+			Object singleResult = query.getSingleResult();
+			if (singleResult != null) {
+				String ref = (String) singleResult;
+				return Optional.of(ref);
+			} else {
+				System.out.println("data is not present for " + id);
+			}
+		} finally {
+			manager.close();
 		}
 
 		return Optional.empty();
@@ -86,14 +96,19 @@ public class GoldJewelleryRepoImpl implements GoldJewelleryRepo {
 	public Optional<Double> findMakingChargesByShopName(String shopName) {
 
 		EntityManager manager = factory.createEntityManager();
-		Query query = manager.createNamedQuery("findMakingChargesByShopName");
-		query.setParameter("sh", shopName);
-		Object singleResult = query.getSingleResult();
-		if (singleResult != null) {
-			Double ref = (Double) singleResult;
-			return Optional.of(ref);
-		} else {
-			System.out.println("data is not present for " + shopName);
+		try {
+			Query query = manager.createNamedQuery("findMakingChargesByShopName");
+
+			query.setParameter("sh", shopName);
+			Object singleResult = query.getSingleResult();
+			if (singleResult != null) {
+				Double ref = (Double) singleResult;
+				return Optional.of(ref);
+			} else {
+				System.out.println("data is not present for " + shopName);
+			}
+		} finally {
+			manager.close();
 		}
 
 		return Optional.empty();
@@ -102,15 +117,20 @@ public class GoldJewelleryRepoImpl implements GoldJewelleryRepo {
 	public Optional<Object[]> findWasteAgeChargesAndMakingChargesByShopName(String shopName) {
 
 		EntityManager manager = factory.createEntityManager();
-		Query query = manager.createNamedQuery("findWasteAgeChargesAndMakingChargesByShopName");
-		query.setParameter("sh", shopName);
-		Object singleResult = query.getSingleResult();
-		if (singleResult != null) {
+		try {
+			Query query = manager.createNamedQuery("findWasteAgeChargesAndMakingChargesByShopName");
 
-			Object[] ref = (Object[]) singleResult;
-			return Optional.of(ref);
-		} else {
-			System.out.println("data is not present for " + shopName);
+			query.setParameter("sh", shopName);
+			Object singleResult = query.getSingleResult();
+			if (singleResult != null) {
+
+				Object[] ref = (Object[]) singleResult;
+				return Optional.of(ref);
+			} else {
+				System.out.println("data is not present for " + shopName);
+			}
+		} finally {
+			manager.close();
 		}
 
 		return Optional.empty();

@@ -1,5 +1,6 @@
 package com.xworkz.jewellery.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,7 +18,6 @@ import org.hibernate.validator.constraints.Length;
 import com.xworkz.jewellery.enums.JewelleryType;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -32,7 +32,7 @@ import lombok.ToString;
 @NamedQuery(name = "findShopNameById", query = "select alia.shopName from GoldJewelleryEntity alia where alia.id=:tag")
 @NamedQuery(name = "findMakingChargesByShopName", query = "select alia.makingCharges from GoldJewelleryEntity alia where alia.shopName=:sh")
 @NamedQuery(name = "findWasteAgeChargesAndMakingChargesByShopName", query = "select alia.wastageCharges,alia.makingCharges from GoldJewelleryEntity alia where alia.shopName=:sh")
-@NamedQuery(name = "findTotalPriceByGramAndShopName", query = "select sum(price) from GoldJewelleryEntity alia where alia.shopName=:sh and alia.grams=:gm")
+@NamedQuery(name = "findTotalPriceByGramAndShopName", query = "select sum(goldPrice + gstPrice + makingCharges + wastageCharges) from GoldJewelleryEntity alia where alia.shopName=:sh and alia.grams=:gm")
 @NamedQuery(name = "findMakingChargesByShopNames", query = "select alia.makingCharges from GoldJewelleryEntity alia where alia.shopName=:sh")
 public class GoldJewelleryEntity {
 	@Id
@@ -41,7 +41,8 @@ public class GoldJewelleryEntity {
 	@Enumerated(EnumType.STRING)
 	private JewelleryType type;
 	@DecimalMin(value = "0.0", message = "values are naot valid")
-	private double price;
+	@Column(name = "price")
+	private double goldPrice;
 	@DecimalMin(value = "0.0", message = "values are naot valid")
 	private double gstPrice;
 	@DecimalMin(value = "0.0", message = "values are naot valid")
@@ -56,11 +57,11 @@ public class GoldJewelleryEntity {
 	@Length(min = 3, max = 50)
 	private String shopName;
 
-	public GoldJewelleryEntity(JewelleryType type, double price, double gstPrice, double grams, double makingCharges,
-			double wastageCharges, boolean copper, String shopName) {
+	public GoldJewelleryEntity(JewelleryType type, double goldPrice, double gstPrice, double grams,
+			double makingCharges, double wastageCharges, boolean copper, String shopName) {
 		super();
 		this.type = type;
-		this.price = price;
+		this.goldPrice = goldPrice;
 		this.gstPrice = gstPrice;
 		this.grams = grams;
 		this.makingCharges = makingCharges;
