@@ -8,6 +8,7 @@ import com.xworkz.jewellery.entity.GoldJewelleryEntity;
 import com.xworkz.jewellery.enums.JewelleryType;
 import com.xworkz.jewellery.service.GoldJewelleryService;
 import com.xworkz.jewellery.service.GoldJewelleryServiceImpl;
+import com.xworkz.jewellery.util.EMFUtil;
 
 public class GoldJewelleryDisplay {
 
@@ -22,48 +23,60 @@ public class GoldJewelleryDisplay {
 				2000.00, true, "Lalitha gold");
 		GoldJewelleryEntity entity4 = new GoldJewelleryEntity(JewelleryType.BRACELETT, 50000.00, 9000.00, 10.0, 2000.00,
 				4000.00, true, "Kalyan jewellery");
-		GoldJewelleryService service = new GoldJewelleryServiceImpl();
+		try {
+			GoldJewelleryService service = new GoldJewelleryServiceImpl();
+
 //		service.validateAndSave(entity);
 
-		List<GoldJewelleryEntity> list = new ArrayList<GoldJewelleryEntity>();
-		list.add(entity1);
-		list.add(entity2);
-		list.add(entity3);
-		list.add(entity4);
+			List<GoldJewelleryEntity> list = new ArrayList<GoldJewelleryEntity>();
+			list.add(entity1);
+			list.add(entity2);
+			list.add(entity3);
+			list.add(entity4);
 //		service.validateAndSave(list);
-		Optional<GoldJewelleryEntity> findByShopNameAndId = service.findByShopNameAndId(2, "Malabar");
-		if (findByShopNameAndId.isPresent()) {
-			GoldJewelleryEntity goldJewelleryEntity = findByShopNameAndId.get();
-			System.out.println(goldJewelleryEntity);
-		}
-
-		Optional<String> findShopNameById = service.findShopNameById(4);
-		if (findShopNameById.isPresent()) {
-			String string = findShopNameById.get();
-			System.out.println(string);
-		}
-
-		Optional<Double> findMakingChargesByShopName = service.findMakingChargesByShopName("Lalitha gold");
-		if (findMakingChargesByShopName.isPresent()) {
-			Double makingCharge = findMakingChargesByShopName.get();
-			System.out.println(makingCharge);
-		}
-
-		Optional<Object[]> findWasteAgeChargesAndMakingChargesByShopName = service
-				.findWasteAgeChargesAndMakingChargesByShopName("Lalitha gold");
-		if (findWasteAgeChargesAndMakingChargesByShopName.isPresent()) {
-			Object[] objects = findWasteAgeChargesAndMakingChargesByShopName.get();
-			for (Object object : objects) {
-				System.out.println(object);
+			Optional<GoldJewelleryEntity> findByShopNameAndId = service.findByShopNameAndId(2, "Malabar");
+			if (findByShopNameAndId.isPresent()) {
+				GoldJewelleryEntity goldJewelleryEntity = findByShopNameAndId.get();
+				System.out.println(goldJewelleryEntity);
 			}
 
-		}
+			Optional<String> findShopNameById = service.findShopNameById(4);
+			if (findShopNameById.isPresent()) {
+				String string = findShopNameById.get();
+				System.out.println(string);
+			}
 
-		Optional<Double> findTotalPriceByGramAndShopName = service.findTotalPriceByGramAndShopName(10.0,
-				"Kalyan jewellery");
-		if (findTotalPriceByGramAndShopName.isPresent()) {
-			Double double1 = findTotalPriceByGramAndShopName.get();
-			System.out.println(double1);
+			Optional<Double> findMakingChargesByShopName = service.findMakingChargesByShopName("Lalitha gold");
+			if (findMakingChargesByShopName.isPresent()) {
+				Double makingCharge = findMakingChargesByShopName.get();
+				System.out.println(makingCharge);
+			}
+
+			Optional<Object[]> findWasteAgeChargesAndMakingChargesByShopName = service
+					.findWasteAgeChargesAndMakingChargesByShopName("Lalitha gold");
+			if (findWasteAgeChargesAndMakingChargesByShopName.isPresent()) {
+				Object[] objects = findWasteAgeChargesAndMakingChargesByShopName.get();
+				for (Object object : objects) {
+					System.out.println(object);
+				}
+
+			}
+
+			Optional<Double> findTotalPriceByGramAndShopName = service.findTotalPriceByGramAndShopName(10.0,
+					"Kalyan jewellery");
+			if (findTotalPriceByGramAndShopName.isPresent()) {
+				Double double1 = findTotalPriceByGramAndShopName.get();
+				System.out.println(double1);
+			}
+
+			Optional<List<GoldJewelleryEntity>> findMakingChargesByShopNames = service
+					.findMakingChargesByShopNames("Kalyan jewellery");
+			if (findMakingChargesByShopNames.isPresent()) {
+				List<GoldJewelleryEntity> list2 = findMakingChargesByShopNames.get();
+				System.out.println(list2);
+			}
+		} finally {
+			EMFUtil.getFactory().close();
 		}
 
 	}

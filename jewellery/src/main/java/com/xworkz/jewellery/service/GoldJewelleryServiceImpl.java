@@ -70,4 +70,9 @@ public class GoldJewelleryServiceImpl implements GoldJewelleryService {
 		return repo.findTotalPriceByGramAndShopName(gram, shopName);
 	}
 
+	public Optional<List<GoldJewelleryEntity>> findMakingChargesByShopNames(String shopName) {
+
+		return repo.findMakingChargesByShopNames(shopName);
+	}
+
 }

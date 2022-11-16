@@ -139,4 +139,21 @@ public class GoldJewelleryRepoImpl implements GoldJewelleryRepo {
 		return Optional.empty();
 	}
 
+	public Optional<List<GoldJewelleryEntity>> findMakingChargesByShopNames(String shopName) {
+		EntityManager manager = factory.createEntityManager();
+		try {
+			Query query = manager.createNamedQuery("findMakingChargesByShopNames");
+
+			query.setParameter("sh", shopName);
+			List<GoldJewelleryEntity> resultList = query.getResultList();
+			if (resultList != null) {
+				System.out.println("data is valid");
+				return Optional.of(resultList);
+			}
+		} finally {
+			manager.close();
+		}
+		return Optional.empty();
+	}
+
 }

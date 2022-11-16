@@ -19,5 +19,7 @@ public interface GoldJewelleryService {
 	Optional<Object[]> findWasteAgeChargesAndMakingChargesByShopName(String shopName);
 
 	Optional<Double> findTotalPriceByGramAndShopName(double gram, String shopName);
+	
+	Optional<List<GoldJewelleryEntity>> findMakingChargesByShopNames(String shopName);
 
 }
