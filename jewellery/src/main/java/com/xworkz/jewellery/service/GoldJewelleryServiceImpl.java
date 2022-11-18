@@ -1,5 +1,6 @@
 package com.xworkz.jewellery.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -55,6 +56,11 @@ public class GoldJewelleryServiceImpl implements GoldJewelleryService {
 		return repo.findShopNameById(id);
 	}
 
+	public Optional<String> findShopNameByIds(int id) {
+
+		return repo.findShopNameByIds(id);
+	}
+
 	public Optional<Double> findMakingChargesByShopName(String shopName) {
 
 		return repo.findMakingChargesByShopName(shopName);
@@ -73,6 +79,42 @@ public class GoldJewelleryServiceImpl implements GoldJewelleryService {
 	public Optional<List<GoldJewelleryEntity>> findMakingChargesByShopNames(String shopName) {
 
 		return repo.findMakingChargesByShopNames(shopName);
+	}
+
+	public Collection<GoldJewelleryEntity> getAll() {
+
+		return repo.getAll();
+	}
+
+	@Override
+	public Collection<String> getAllShopName() {
+
+		return repo.getAllShopName();
+	}
+
+	@Override
+	public Collection<Object[]> getAllShopNameAndType() {
+
+		return repo.getAllShopNameAndType();
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByMakingChargesGreaterThan(double charges) {
+
+		return repo.findAllByMakingChargesGreaterThan(charges);
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesLessThan(double charges) {
+
+		return repo.findAllByWasteageChargesLessThan(charges);
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan(
+			double wasteAgecharges, double makingCharges) {
+
+		return repo.findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan(wasteAgecharges, makingCharges);
 	}
 
 }

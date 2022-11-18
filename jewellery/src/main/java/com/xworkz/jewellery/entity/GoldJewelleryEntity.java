@@ -34,6 +34,12 @@ import lombok.ToString;
 @NamedQuery(name = "findWasteAgeChargesAndMakingChargesByShopName", query = "select alia.wastageCharges,alia.makingCharges from GoldJewelleryEntity alia where alia.shopName=:sh")
 @NamedQuery(name = "findTotalPriceByGramAndShopName", query = "select sum(goldPrice + gstPrice + makingCharges + wastageCharges) from GoldJewelleryEntity alia where alia.shopName=:sh and alia.grams=:gm")
 @NamedQuery(name = "findMakingChargesByShopNames", query = "select alia.makingCharges from GoldJewelleryEntity alia where alia.shopName=:sh")
+@NamedQuery(name = "getAll", query = "select alia from GoldJewelleryEntity alia")
+@NamedQuery(name = "getAllShopName", query = "select alia.shopName from GoldJewelleryEntity alia")
+@NamedQuery(name = "getAllShopNameAndType", query = "select alia.shopName,alia.type from GoldJewelleryEntity alia")
+@NamedQuery(name = "findAllByMakingChargesGreaterThan", query = "select alia from GoldJewelleryEntity alia where alia.makingCharges>:ch")
+@NamedQuery(name = "findAllByWasteageChargesLessThan", query = "select alia from GoldJewelleryEntity alia where alia.wastageCharges<:ch")
+@NamedQuery(name = "findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan", query = "select alia from GoldJewelleryEntity alia where alia.wastageCharges>:wa and alia.makingCharges>:mk")
 public class GoldJewelleryEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

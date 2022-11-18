@@ -1,5 +1,6 @@
 package com.xworkz.jewellery.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,12 +15,27 @@ public interface GoldJewelleryService {
 
 	Optional<String> findShopNameById(int id);
 
+	Optional<String> findShopNameByIds(int id);
+
 	Optional<Double> findMakingChargesByShopName(String shopName);
 
 	Optional<Object[]> findWasteAgeChargesAndMakingChargesByShopName(String shopName);
 
 	Optional<Double> findTotalPriceByGramAndShopName(double gram, String shopName);
-	
+
 	Optional<List<GoldJewelleryEntity>> findMakingChargesByShopNames(String shopName);
+
+	Collection<GoldJewelleryEntity> getAll();
+
+	Collection<String> getAllShopName();
+
+	Collection<Object[]> getAllShopNameAndType();
+
+	Optional<Collection<GoldJewelleryEntity>> findAllByMakingChargesGreaterThan(double charges);
+	
+	Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesLessThan(double charges);
+	
+	Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan(
+			double wasteAgecharges, double makingCharges);
 
 }

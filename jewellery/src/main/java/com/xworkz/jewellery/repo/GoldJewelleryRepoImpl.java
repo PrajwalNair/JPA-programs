@@ -1,5 +1,6 @@
 package com.xworkz.jewellery.repo;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,6 +94,19 @@ public class GoldJewelleryRepoImpl implements GoldJewelleryRepo {
 		return Optional.empty();
 	}
 
+	public Optional<String> findShopNameByIds(int id) {
+		EntityManager manager = factory.createEntityManager();
+		GoldJewelleryEntity find = manager.find(GoldJewelleryEntity.class, id);
+		if (find != null) {
+			System.out.println("data is valid");
+			Optional.of(find);
+		} else {
+			System.out.println("id is invalid" + id);
+		}
+
+		return Optional.empty();
+	}
+
 	public Optional<Double> findMakingChargesByShopName(String shopName) {
 
 		EntityManager manager = factory.createEntityManager();
@@ -174,6 +188,74 @@ public class GoldJewelleryRepoImpl implements GoldJewelleryRepo {
 			manager.close();
 		}
 		return Optional.empty();
+	}
+
+	public Collection<GoldJewelleryEntity> getAll() {
+		EntityManager manager = factory.createEntityManager();
+		try {
+			return manager.createNamedQuery("getAll").getResultList();
+		} finally {
+			manager.close();
+		}
+
+	}
+
+	@Override
+	public Collection<String> getAllShopName() {
+		EntityManager createEntityManager = factory.createEntityManager();
+		try {
+			return createEntityManager.createNamedQuery("getAllShopName").getResultList();
+		} finally {
+			createEntityManager.close();
+		}
+
+	}
+
+	@Override
+	public Collection<Object[]> getAllShopNameAndType() {
+		EntityManager createEntityManager = factory.createEntityManager();
+		try {
+			return createEntityManager.createNamedQuery("getAllShopNameAndType").getResultList();
+		} finally {
+			createEntityManager.close();
+		}
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByMakingChargesGreaterThan(double charges) {
+
+		EntityManager createEntityManager = factory.createEntityManager();
+		try {
+			return Optional.of(createEntityManager.createNamedQuery("findAllByMakingChargesGreaterThan")
+					.setParameter("ch", charges).getResultList());
+		} finally {
+			createEntityManager.close();
+		}
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesLessThan(double charges) {
+		EntityManager createEntityManager = factory.createEntityManager();
+		try {
+			return Optional.of(createEntityManager.createNamedQuery("findAllByWasteageChargesLessThan")
+					.setParameter("ch", charges).getResultList());
+		} finally {
+			createEntityManager.close();
+		}
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan(
+			double wasteAgecharges, double makingCharges) {
+
+		EntityManager createEntityManager = factory.createEntityManager();
+		try {
+			return Optional.of(createEntityManager
+					.createNamedQuery("findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan")
+					.setParameter("wa", wasteAgecharges).setParameter("mk", makingCharges).getResultList());
+		} finally {
+			createEntityManager.close();
+		}
 	}
 
 }

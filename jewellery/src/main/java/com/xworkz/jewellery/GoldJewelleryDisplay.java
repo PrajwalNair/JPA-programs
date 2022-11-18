@@ -1,8 +1,11 @@
 package com.xworkz.jewellery;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+
+import org.hibernate.internal.build.AllowSysOut;
 
 import com.xworkz.jewellery.entity.GoldJewelleryEntity;
 import com.xworkz.jewellery.enums.JewelleryType;
@@ -40,17 +43,31 @@ public class GoldJewelleryDisplay {
 				System.out.println(goldJewelleryEntity);
 			}
 
+			System.out.println("=================================");
+
 			Optional<String> findShopNameById = service.findShopNameById(4);
 			if (findShopNameById.isPresent()) {
 				String string = findShopNameById.get();
 				System.out.println(string);
 			}
 
+			System.out.println("=================================");
+
+			Optional<String> findShopNameByIds = service.findShopNameByIds(1);
+			if (findShopNameByIds.isPresent()) {
+				String string = findShopNameByIds.get();
+				System.out.println(string);
+			}
+
+			System.out.println("=================================");
+
 			Optional<Double> findMakingChargesByShopName = service.findMakingChargesByShopName("Lalitha gold");
 			if (findMakingChargesByShopName.isPresent()) {
 				Double makingCharge = findMakingChargesByShopName.get();
 				System.out.println(makingCharge);
 			}
+
+			System.out.println("=================================");
 
 			Optional<Object[]> findWasteAgeChargesAndMakingChargesByShopName = service
 					.findWasteAgeChargesAndMakingChargesByShopName("Lalitha gold");
@@ -62,6 +79,8 @@ public class GoldJewelleryDisplay {
 
 			}
 
+			System.out.println("=================================");
+
 			Optional<Double> findTotalPriceByGramAndShopName = service.findTotalPriceByGramAndShopName(10.0,
 					"Joyalukas");
 			if (findTotalPriceByGramAndShopName.isPresent()) {
@@ -69,12 +88,62 @@ public class GoldJewelleryDisplay {
 				System.out.println(double1);
 			}
 
+			System.out.println("=================================");
+
 			Optional<List<GoldJewelleryEntity>> findMakingChargesByShopNames = service
 					.findMakingChargesByShopNames("Kalyan jewellery");
 			if (findMakingChargesByShopNames.isPresent()) {
 				List<GoldJewelleryEntity> list2 = findMakingChargesByShopNames.get();
 				System.out.println(list2);
 			}
+
+			System.out.println("=================================");
+
+			Collection<GoldJewelleryEntity> all = service.getAll();
+			all.forEach(ref -> System.out.println(ref));
+
+			System.out.println("=================================");
+
+			Collection<String> allShop = service.getAllShopName();
+			allShop.forEach(ref -> System.out.println(ref));
+
+			System.out.println("=================================");
+
+			Collection<Object[]> allShopAndType = service.getAllShopNameAndType();
+			for (Object[] objects : allShopAndType) {
+				for (int i = 0; i < objects.length; i++) {
+					System.out.println(objects[i]);
+				}
+
+			}
+
+			System.out.println("=================================");
+
+			Optional<Collection<GoldJewelleryEntity>> findAllByMakingChargesGreaterThan = service
+					.findAllByMakingChargesGreaterThan(2000.00);
+			if (findAllByMakingChargesGreaterThan.isPresent()) {
+				System.out.println(findAllByMakingChargesGreaterThan.get());
+
+			}
+
+			System.out.println("=================================");
+
+			Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesLessThan = service
+					.findAllByWasteageChargesLessThan(5000.00);
+			if (findAllByWasteageChargesLessThan.isPresent()) {
+				System.out.println(findAllByWasteageChargesLessThan.get());
+
+			}
+
+			System.out.println("=================================");
+
+			Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan = service
+					.findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan(2000, 1000);
+			if (findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan.isPresent()) {
+				System.out.println(findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan.get());
+
+			}
+
 		} finally {
 			EMFUtil.getFactory().close();
 		}

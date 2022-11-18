@@ -19,13 +19,12 @@ public class UniversityDisplay {
 		List<UniversityEntity> entities = new ArrayList<UniversityEntity>();
 		for (int i = 0; i < 2000; i++) {
 			entities.add(entity);
-			entities.add(entity1);
 
 			System.out.println(entities.size());
 		}
 		UniversityService service = new UniversityServiceImpl();
-//		boolean validateAndSave = service.validateAndSave(entities);
-//		System.out.println(validateAndSave);
+		boolean validateAndSave = service.validateAndSave(entities);
+		System.out.println(validateAndSave);
 
 		Optional<UniversityEntity> findNameById = service.findNameById(1);
 		if (findNameById.isPresent()) {

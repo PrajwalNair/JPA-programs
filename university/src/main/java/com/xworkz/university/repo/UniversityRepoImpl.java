@@ -22,11 +22,13 @@ public class UniversityRepoImpl implements UniversityRepo {
 		try {
 			transaction.begin();
 			for (UniversityEntity universityEntity : list) {
-				manager.persist(universityEntity);
+				manager.merge(universityEntity);
 				count++;
+//				System.out.println(count);
 				if (count == 20) {
 					manager.flush();
 					System.out.println("flushed");
+					System.out.println(count);
 					count = 0;
 				}
 
