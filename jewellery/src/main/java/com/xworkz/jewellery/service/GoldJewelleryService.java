@@ -32,10 +32,16 @@ public interface GoldJewelleryService {
 	Collection<Object[]> getAllShopNameAndType();
 
 	Optional<Collection<GoldJewelleryEntity>> findAllByMakingChargesGreaterThan(double charges);
-	
+
 	Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesLessThan(double charges);
-	
+
 	Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan(
 			double wasteAgecharges, double makingCharges);
+
+	Optional<Collection<GoldJewelleryEntity>> findAll();
+
+	Optional<GoldJewelleryEntity> displayByShopName(String name);
+
+	Collection<GoldJewelleryEntity> allItems();
 
 }

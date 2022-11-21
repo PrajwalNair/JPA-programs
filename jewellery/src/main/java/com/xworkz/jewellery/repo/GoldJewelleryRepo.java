@@ -38,4 +38,10 @@ public interface GoldJewelleryRepo {
 	Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan(
 			double wasteAgecharges, double makingCharges);
 
+	Optional<Collection<GoldJewelleryEntity>> findAll();
+
+	Optional<GoldJewelleryEntity> displayByShopName(String name);
+
+	Collection<GoldJewelleryEntity> allItems();
+
 }

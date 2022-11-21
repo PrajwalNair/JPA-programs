@@ -144,6 +144,27 @@ public class GoldJewelleryDisplay {
 
 			}
 
+			System.out.println("===============Using native Query==================");
+
+			Optional<Collection<GoldJewelleryEntity>> findAll = service.findAll();
+			if (findAll.isPresent()) {
+				Collection<GoldJewelleryEntity> collection = findAll.get();
+				System.out.println(collection);
+
+			}
+
+			Optional<GoldJewelleryEntity> displayByShopName = service.displayByShopName("Joyalukas");
+			if (displayByShopName.isPresent()) {
+				GoldJewelleryEntity goldJewelleryEntity = displayByShopName.get();
+//				for (Object object : goldJewelleryEntity) {
+				System.out.println(goldJewelleryEntity);
+//				}
+
+			}
+
+			Collection<GoldJewelleryEntity> allItems = service.allItems();
+			System.out.println(allItems);
+
 		} finally {
 			EMFUtil.getFactory().close();
 		}

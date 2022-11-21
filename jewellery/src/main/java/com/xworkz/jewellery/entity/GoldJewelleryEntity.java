@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
@@ -24,7 +25,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@Entity
+@Entity(name = "GoldJewelleryEntity")
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "gold_jewellery")
@@ -40,6 +41,8 @@ import lombok.ToString;
 @NamedQuery(name = "findAllByMakingChargesGreaterThan", query = "select alia from GoldJewelleryEntity alia where alia.makingCharges>:ch")
 @NamedQuery(name = "findAllByWasteageChargesLessThan", query = "select alia from GoldJewelleryEntity alia where alia.wastageCharges<:ch")
 @NamedQuery(name = "findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan", query = "select alia from GoldJewelleryEntity alia where alia.wastageCharges>:wa and alia.makingCharges>:mk")
+@NamedNativeQuery(name = "findAll", query = "select * from gold_jewellery", resultClass = GoldJewelleryEntity.class)
+@NamedNativeQuery(name = "displayByShopName", query = "select * from gold_jewellery where shopName=:nm", resultClass = GoldJewelleryEntity.class)
 public class GoldJewelleryEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

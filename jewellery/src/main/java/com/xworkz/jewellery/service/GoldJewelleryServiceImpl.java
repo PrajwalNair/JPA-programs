@@ -117,4 +117,22 @@ public class GoldJewelleryServiceImpl implements GoldJewelleryService {
 		return repo.findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan(wasteAgecharges, makingCharges);
 	}
 
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAll() {
+
+		return repo.findAll();
+	}
+
+	@Override
+	public Optional<GoldJewelleryEntity> displayByShopName(String name) {
+
+		return repo.displayByShopName(name);
+	}
+
+	@Override
+	public Collection<GoldJewelleryEntity> allItems() {
+
+		return repo.allItems();
+	}
+
 }

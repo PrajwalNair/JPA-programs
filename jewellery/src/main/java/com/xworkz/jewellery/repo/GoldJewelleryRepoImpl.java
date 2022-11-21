@@ -9,6 +9,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import com.xworkz.jewellery.entity.GoldJewelleryEntity;
 import com.xworkz.jewellery.util.EMFUtil;
@@ -256,6 +260,48 @@ public class GoldJewelleryRepoImpl implements GoldJewelleryRepo {
 		} finally {
 			createEntityManager.close();
 		}
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAll() {
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<GoldJewelleryEntity> query = manager.createNamedQuery("findAll", GoldJewelleryEntity.class);
+		List<GoldJewelleryEntity> resultList = query.getResultList();
+		if (resultList != null) {
+			System.out.println("data is valid");
+			return Optional.of(resultList);
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<GoldJewelleryEntity> displayByShopName(String name) {
+		EntityManager manager = factory.createEntityManager();
+		Query query = manager.createNamedQuery("displayByShopName");
+		query.setParameter("nm", name);
+		Object singleResult = query.getSingleResult();
+		if (singleResult != null) {
+			System.out.println("data is valid");
+			GoldJewelleryEntity ref = (GoldJewelleryEntity) singleResult;
+			return Optional.of(ref);
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Collection<GoldJewelleryEntity> allItems() {
+		EntityManager manager = factory.createEntityManager();
+		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+		CriteriaQuery<GoldJewelleryEntity> createQuery = criteriaBuilder.createQuery(GoldJewelleryEntity.class);
+		Root<GoldJewelleryEntity> from = createQuery.from(GoldJewelleryEntity.class);
+		createQuery.select(from);
+		TypedQuery<GoldJewelleryEntity> createQuery2 = manager.createQuery(createQuery);
+		List<GoldJewelleryEntity> resultList = createQuery2.getResultList();
+		if (resultList != null) {
+			System.out.println("data is valid");
+			return resultList;
+		}
+		return null;
 	}
 
 }
